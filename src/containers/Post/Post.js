@@ -1,16 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Comment from '../../components/Comment';
-import { fetch } from './actions';
+import {fetch} from './actions';
 
 class Post extends React.PureComponent {
 
     componentDidMount() {
         /* Well I don't know :/ */
+        this.props.fetchPost(this.props.match.params.id);
     }
 
     renderCommentsList = () => {
-        return <div></div>;
+        return this.props.comments.map(comment => {
+            return <Comment authorName={comment.name}
+                            authorEmail={comment.email}
+                            content={comment.body}/>
+        });
     };
 
     render() {
@@ -35,10 +40,19 @@ class Post extends React.PureComponent {
     }
 }
 
-export default connect(({ post }) => ({
-    /*
-     *
-     * I want some props :)
-     *
-     * */
-}))(Post);
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        post:state.post.post,
+        comments:state.post.comments,
+        user:state.post.user,
+    }
+
+
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchPost: (postId) => dispatch(fetch(postId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

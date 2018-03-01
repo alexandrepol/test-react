@@ -27,6 +27,10 @@ class Home extends React.PureComponent {
     }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+    fetchPosts: () => dispatch(fetch())
+});
+
 export default connect(({ home }) => ({
     posts: home.posts
 }))(Home);

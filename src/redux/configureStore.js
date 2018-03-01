@@ -1,4 +1,5 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
+//npm install --save redux-thunk
 import thunk from 'redux-thunk';
 import home from '../containers/Home/reducer';
 import post from '../containers/Post/reducer';
@@ -9,7 +10,7 @@ function configureStore() {
 
     const reducer = combineReducers({
         home,
-        post
+        post,
     });
 
     const store = createStore(reducer, enhancer);

@@ -6,7 +6,8 @@ import * as c from './actions';
 
 const initialState = {
     post: null,
-    user: null
+    user: null,
+    comments:[],
 };
 
 export default function post(state = initialState, action) {
@@ -22,6 +23,11 @@ export default function post(state = initialState, action) {
             return {
                 ...state,
                 post: action.post
+            };
+        case c.FETCHED_COMMENTS:
+            return {
+                ...state,
+                comments: action.comments
             };
         default:
             return state;

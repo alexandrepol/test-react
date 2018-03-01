@@ -7,6 +7,9 @@ const call = (route) => {
         const url = `${endpoint}${route}`;
 
         /**  Missing something ?? **/
+        request.open("GET", url, true);
+        request.send(null);
+
 
         request.onreadystatechange = function () {
             if (request.readyState === 4 && request.status === 200) {
@@ -30,8 +33,12 @@ const Api = {
         return call(`posts/${idPost}`);
     },
 
+    getUser: (userId) => {
+        return call(`users/${userId}`);
+    },
+
     getPostComments: (idPost) => {
-        return [];
+        return call(`comments?postId=${idPost}`);
     },
 };
 

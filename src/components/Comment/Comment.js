@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 function Comment({authorName, authorEmail, content}) {
     return (
-        <div>
-            /**
-             *
-             * This one should be easy
-             *
-             * **/
-        </div>
+        <li key={authorName}>
+            <div>
+                <p>{content}</p>
+                <p>From {authorName} <span>{"<"+authorEmail+">"}</span></p>
+            </div>
+
+        </li>
     );
 }
 

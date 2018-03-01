@@ -13,20 +13,35 @@ export function fetchedPost(post) {
 }
 
 export function fetchedUser(user) {
-    /*
-     * Must return something right ?
-     */
+    return {
+        type: FETCHED_USER,
+        user
+    }
 }
 
-export function fetchedComments(/* params ? */) {
-    /*
-     * Just to be sure you understood :)
-     */
+export function fetchedComments(comments) {
+    return {
+        type: FETCHED_COMMENTS,
+        comments
+    }
 }
 
 export function startFetch() {
     return {
         type: START_FETCH
+    }
+}
+
+export function fetchUser(userId){
+    return (dispatch) => {
+
+        Api.getUser(userId).then(data => {
+            console.log(userId)
+            dispatch(fetchedUser(data));
+        }).catch(err => {
+            console.error(err);
+        });
+
     }
 }
 
@@ -41,12 +56,15 @@ export function fetch(postId) {
 
         Api.getPost(postId).then(data => {
             dispatch(fetchedPost(data));
+            dispatch(fetchUser(data.userId))
         }).catch(err => {
             console.error(err);
         });
 
         Api.getPostComments(postId).then(data => {
             dispatch(fetchedComments(data));
+        }).catch(err => {
+            console.error(err);
         });
 
         /*

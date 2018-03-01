@@ -21,6 +21,7 @@ ReactDOM.render((
                 <App>
                     <Switch>
                         <Route exact path="/" component={Home} />
+                        <Route path="/posts/:id" component={Post} />
                         { /*  Missing a route ?  */ }
                         <Route component={NoMatch}/>
                     </Switch>
